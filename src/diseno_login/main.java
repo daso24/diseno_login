@@ -10,7 +10,7 @@ public class main {
 		ventana miniventana = new ventana();
 		
 				miniventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
+	 
 				miniventana.setVisible(true);
 			
 
