@@ -10,6 +10,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -28,6 +31,30 @@ import javax.swing.JTextField;
 			this.setLocation(200, 200);
 			this.setLayout(null);
 				
+			JMenuBar barra = new JMenuBar();
+			JMenu archivo = new JMenu("Archivo");
+			JMenuItem open = new JMenuItem("Abrir");
+			JMenuItem close = new JMenuItem("Cerrar");
+			JMenuItem save = new JMenuItem("Guardar");
+			JMenuItem newfile = new JMenuItem("Nuevo");
+			archivo.add(open);
+			archivo.add(close);
+			archivo.add(save);
+			archivo.add(newfile);
+			barra.add(archivo);
+			
+			JMenu submenu = new JMenu("otros");
+			archivo.addSeparator();
+			JMenuItem menuitem = new JMenuItem("un item al menu");
+			submenu.add(menuitem);
+			
+			menuitem = new JMenuItem("otro item");
+			submenu.add(menuitem);
+			archivo.add(submenu);
+			
+			
+			this.setJMenuBar(barra);
+			
 		
 	}
 	
@@ -361,6 +388,8 @@ import javax.swing.JTextField;
 			users.repaint();
 			users.revalidate();
 	}
+		
+		
 	
 	
 
