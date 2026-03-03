@@ -57,7 +57,6 @@ import javax.swing.JTextField;
 			
 			
 			this.setJMenuBar(barra);
-
 	}
 	
 		public void login() {
