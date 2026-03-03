@@ -1,5 +1,8 @@
 package diseno_login;
 
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +13,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -28,7 +34,30 @@ import javax.swing.JTextField;
 			this.setLocation(200, 200);
 			this.setLayout(null);
 				
-		
+			JMenuBar barra = new JMenuBar();
+			JMenu archivo = new JMenu("Archivo");
+			JMenuItem open = new JMenuItem("Abrir");
+			JMenuItem close = new JMenuItem("Cerrar");
+			JMenuItem save = new JMenuItem("Guardar");
+			JMenuItem newfile = new JMenuItem("Nuevo");
+			archivo.add(open);
+			archivo.add(close);
+			archivo.add(save);
+			archivo.add(newfile);
+			barra.add(archivo);
+			
+			JMenu submenu = new JMenu("otros");
+			archivo.addSeparator();
+			JMenuItem menuitem = new JMenuItem("un item al menu");
+			submenu.add(menuitem);
+			
+			menuitem = new JMenuItem("otro item");
+			submenu.add(menuitem);
+			archivo.add(submenu);
+			
+			
+			this.setJMenuBar(barra);
+
 	}
 	
 		public void login() {
@@ -53,6 +82,14 @@ import javax.swing.JTextField;
 			title_login.setFont(new Font("Arial", Font.BOLD, 28));
 			title_login.setHorizontalAlignment(JLabel.CENTER);
 			contenedor.add(title_login);
+			
+			// icono usuario
+	        JLabel icono_user = new JLabel();
+	        icono_user.setBounds(20, 175, 25, 25);
+	        ImageIcon img_user = new ImageIcon("C:/Users/PC/Downloads/candado.jfif"); 
+	        Icon esc_user = new ImageIcon(img_user.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+	        icono_user.setIcon(esc_user);
+	        contenedor.add(icono_user);
 						
 			// etiqueta nombre de usuario
 			JLabel etq_user = new JLabel();
@@ -68,6 +105,14 @@ import javax.swing.JTextField;
 			username.setLocation(50, 170);
 			username.setFont(new Font("Arial", Font.BOLD, 18));
 			contenedor.add(username);
+			
+			// icono contraseña
+	        JLabel icono_pass = new JLabel();
+	        icono_pass.setBounds(20, 275, 25, 25);
+	        ImageIcon img_pass = new ImageIcon("C:/Users/PC/Downloads/user.jfif"); 
+	        Icon esc_pass = new ImageIcon(img_pass.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+	        icono_pass.setIcon(esc_pass);
+	        contenedor.add(icono_pass);
 						
 			// etiqueta Contraseña
 			JLabel etq_contra = new JLabel();
@@ -118,6 +163,21 @@ import javax.swing.JTextField;
 						
 			contenedor.repaint();
 			contenedor.revalidate();
+			
+			// panel imagen grande
+	        JPanel panel_imagen = new JPanel();
+	        panel_imagen.setSize(465, 600);
+	        panel_imagen.setLocation(450, 0);
+	        panel_imagen.setLayout(null);
+	        this.add(panel_imagen);
+
+	        JLabel imagen_grande = new JLabel();
+	        imagen_grande.setSize(465, 600);
+	        imagen_grande.setLocation(0, 0);
+	        ImageIcon img_fondo = new ImageIcon("C:/Users/PC/Downloads/welcome2.png"); 
+	        Icon esc_fondo = new ImageIcon(img_fondo.getImage().getScaledInstance(465, 460, Image.SCALE_SMOOTH));
+	        imagen_grande.setIcon(esc_fondo);
+	        panel_imagen.add(imagen_grande);
 	}
 	
 		public void register() {
@@ -361,6 +421,8 @@ import javax.swing.JTextField;
 			users.repaint();
 			users.revalidate();
 	}
+		
+		
 	
 	
 
