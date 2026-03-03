@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 
 	public class ventana extends JFrame {
 		public ventana() {
-			
+		
 			// ventana principal
 			this.setSize(915, 600);
 			this.setMinimumSize(new Dimension(915, 600));
