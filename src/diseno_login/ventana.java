@@ -3,9 +3,14 @@ package diseno_login;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import java.awt.Image;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -27,9 +32,9 @@ import javax.swing.JTextField;
 		public ventana() {
 		
 			// ventana principal
-			this.setSize(915, 600);
-			this.setMinimumSize(new Dimension(915, 600));
-			this.setMaximumSize(new Dimension(915, 600));
+			this.setSize(600, 700);
+			this.setMinimumSize(new Dimension(600, 700));
+			this.setMaximumSize(new Dimension(600, 700));
 			this.setTitle("Mi ventana");
 			this.setLocation(200, 200);
 			this.setLayout(null);
@@ -56,7 +61,10 @@ import javax.swing.JTextField;
 			archivo.add(submenu);
 			
 			
-			this.setJMenuBar(barra);
+			//this.setJMenuBar(barra);
+			this.calculadora_layaouts();
+
+			this.setVisible(true);
 	}
 	
 		public void login() {
@@ -418,8 +426,119 @@ import javax.swing.JTextField;
 			users.add(scrollpane);
 			
 			users.repaint();
-			users.revalidate();
+			users.revalidate(); 
 	}
+		public void calculadora_layaouts() {
+			// panel principal
+			JPanel main_panel = new JPanel();
+			main_panel.setSize(580, 670);
+			main_panel.setLocation(0, 0);
+			main_panel.setBackground(Color.DARK_GRAY); 
+			main_panel.setLayout(new BorderLayout(10, 10)); 
+			this.add(main_panel);
+			
+			// pantalla texto superior norte
+			JTextField pant_sup = new JTextField();
+			pant_sup.setFont(new Font("Arial", Font.BOLD, 70));
+			pant_sup.setHorizontalAlignment(JLabel.RIGHT); 
+			main_panel.add(pant_sup, BorderLayout.NORTH);
+			
+			// panel central
+			JPanel panel_botones = new JPanel();
+			panel_botones.setLayout(new BorderLayout(10, 10));
+			panel_botones.setBackground(Color.DARK_GRAY);
+			main_panel.add(panel_botones, BorderLayout.CENTER);
+			
+			// botones superiores
+			JPanel panel_sup = new JPanel();
+			panel_sup.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
+			panel_sup.setBackground(Color.DARK_GRAY);
+			
+			JButton boton_mc = new JButton("MC");
+			boton_mc.setBackground(Color.WHITE);
+			
+			JButton boton_m = new JButton("M+");
+			boton_m.setBackground(Color.WHITE);
+			
+			JButton boton_div2 = new JButton("/");
+			boton_div2.setBackground(Color.WHITE);
+			
+			JButton boton_por = new JButton("*");
+			boton_por.setBackground(Color.WHITE);
+			
+			panel_sup.add(boton_mc);
+			panel_sup.add(boton_m);
+			panel_sup.add(boton_div2);
+			panel_sup.add(boton_por);
+			
+			panel_botones.add(panel_sup, BorderLayout.NORTH);
+			
+			// teclas de numeros
+			JPanel panel_numeros = new JPanel();
+			panel_numeros.setLayout(new GridLayout(4, 3, 10, 10)); 
+			panel_numeros.setBackground(Color.DARK_GRAY);
+			
+			JButton boton7 = new JButton("7");
+			boton7.setBackground(Color.WHITE);
+			JButton boton8 = new JButton("8");
+			boton8.setBackground(Color.WHITE);
+			JButton boton9 = new JButton("9");
+			boton9.setBackground(Color.WHITE);
+			JButton boton6 = new JButton("6");
+			boton6.setBackground(Color.WHITE);
+			JButton boton5 = new JButton("5"); 
+			boton5.setBackground(Color.WHITE);
+			JButton boton4 = new JButton("4"); 
+			boton4.setBackground(Color.WHITE);
+			JButton boton3 = new JButton("3"); 
+			boton3.setBackground(Color.WHITE);
+			JButton boton2 = new JButton("2"); 
+			boton2.setBackground(Color.WHITE);
+			JButton boton1 = new JButton("1"); 
+			boton1.setBackground(Color.WHITE);
+			JButton boton0 = new JButton("0"); 
+			boton0.setBackground(Color.WHITE);
+			JButton boton_punto = new JButton("."); 
+			boton_punto.setBackground(Color.WHITE);
+			JButton boton_div = new JButton("/"); 
+			boton_div.setBackground(Color.WHITE);
+			
+			panel_numeros.add(boton7); 
+			panel_numeros.add(boton8); 
+			panel_numeros.add(boton9);
+			panel_numeros.add(boton6); 
+			panel_numeros.add(boton5); 
+			panel_numeros.add(boton4);
+			panel_numeros.add(boton3); 
+			panel_numeros.add(boton2); 
+			panel_numeros.add(boton1);
+			panel_numeros.add(boton0); 
+			panel_numeros.add(boton_punto); 
+			panel_numeros.add(boton_div);
+			
+			panel_botones.add(panel_numeros, BorderLayout.CENTER);
+			
+			// botones laterales derechos
+			JPanel panel_derecho = new JPanel();
+			panel_derecho.setLayout(new GridLayout(4, 1, 10, 10)); 
+			panel_derecho.setBackground(Color.DARK_GRAY);
+			
+			JButton boton_mas = new JButton("+"); 
+			boton_mas.setBackground(Color.WHITE);
+			JButton boton_menos = new JButton("-"); 
+			boton_menos.setBackground(Color.WHITE);
+			JButton boton_igual1 = new JButton("="); 
+			boton_igual1.setBackground(Color.WHITE);
+			JButton boton_igual2 = new JButton("="); 
+			boton_igual2.setBackground(Color.WHITE);
+			
+			panel_derecho.add(boton_mas);
+			panel_derecho.add(boton_menos);
+			panel_derecho.add(boton_igual1);
+			panel_derecho.add(boton_igual2);
+			
+			panel_botones.add(panel_derecho, BorderLayout.EAST);
+		}
 		
 		
 	
