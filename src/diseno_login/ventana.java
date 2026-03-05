@@ -32,9 +32,9 @@ import javax.swing.JTextField;
 		public ventana() {
 		
 			// ventana principal
-			this.setSize(600, 700);
-			this.setMinimumSize(new Dimension(600, 700));
-			this.setMaximumSize(new Dimension(600, 700));
+			this.setSize(625,500);
+			this.setMinimumSize(new Dimension(625, 500));
+			this.setMaximumSize(new Dimension(625, 500));
 			this.setTitle("Mi ventana");
 			this.setLocation(200, 200);
 			this.setLayout(null);
@@ -538,6 +538,116 @@ import javax.swing.JTextField;
 			panel_derecho.add(boton_igual2);
 			
 			panel_botones.add(panel_derecho, BorderLayout.EAST);
+		}
+		
+		public void calc_int() {
+			// panel principal
+			JPanel calc = new JPanel();
+			calc.setSize(1000, 500);
+			calc.setLocation(0, 0);
+			calc.setLayout(null);
+			calc.setBackground(Color.WHITE);
+			this.add(calc);
+						
+			// titulo principal
+			JLabel title = new JLabel("Interés");
+			title.setBounds(30, 10, 200, 40);
+			title.setForeground(Color.RED);
+			title.setFont(new Font("Arial", Font.BOLD, 32));
+			calc.add(title);
+						
+			// panel verde
+			JPanel panel_ver = new JPanel();
+			panel_ver.setBounds(30, 60, 550, 200);
+			panel_ver.setBackground(Color.blue);
+			panel_ver.setLayout(null);
+			calc.add(panel_ver);
+						
+			// subtitulo del panel verde
+			JLabel subt = new JLabel("Calcular interés");
+			subt.setBounds(10, 10, 200, 25);
+			subt.setFont(new Font("Arial", Font.BOLD, 14));
+			panel_ver.add(subt);
+						
+			// campo apital
+			JLabel lbl_cap = new JLabel("Capital:");
+			lbl_cap.setBounds(140, 40, 100, 25);
+			lbl_cap.setFont(new Font("Arial", Font.BOLD, 16));
+			lbl_cap.setHorizontalAlignment(JLabel.RIGHT);
+			panel_ver.add(lbl_cap);
+						
+			JTextField text_cap = new JTextField("1500");
+			text_cap.setBounds(250, 40, 100, 25);
+			panel_ver.add(text_cap);
+						
+			// campo tiempo
+			JLabel lbl_time = new JLabel("Tiempo:");
+			lbl_time.setBounds(140, 75, 100, 25);
+			lbl_time.setFont(new Font("Arial", Font.BOLD, 16));
+			lbl_time.setHorizontalAlignment(JLabel.RIGHT);
+			panel_ver.add(lbl_time);
+						
+			JTextField text_time = new JTextField("2");
+			text_time.setBounds(250, 75, 100, 25);
+			panel_ver.add(text_time);
+						
+			// campo tasa de interes
+			JLabel lbl_tasa = new JLabel("Tasa interés:");
+			lbl_tasa.setBounds(120, 110, 120, 25);
+			lbl_tasa.setFont(new Font("Arial", Font.BOLD, 16));
+			lbl_tasa.setHorizontalAlignment(JLabel.RIGHT);
+			panel_ver.add(lbl_tasa);
+						
+			JTextField text_tasa = new JTextField("0.1");
+			text_tasa.setBounds(250, 110, 100, 25);
+			panel_ver.add(text_tasa);
+						
+			// boton calcular
+			JButton boton_calc = new JButton("Calcular");
+			boton_calc.setBounds(200, 150, 90, 30);
+			boton_calc.setBackground(Color.DARK_GRAY);
+			boton_calc.setForeground(Color.WHITE);
+			panel_ver.add(boton_calc);
+						
+			// boton cancelar
+			JButton boton_cancel = new JButton("Cancelar");
+			boton_cancel.setBounds(300, 150, 90, 30);
+			boton_cancel.setBackground(Color.DARK_GRAY);
+			boton_cancel.setForeground(Color.WHITE);
+			panel_ver.add(boton_cancel);
+						
+			// panel rojo
+			JPanel panel_rojo = new JPanel();
+			panel_rojo.setBounds(30, 290, 550, 90);
+			panel_rojo.setBackground(new Color(255, 153, 153)); 
+			panel_rojo.setLayout(null);
+			calc.add(panel_rojo);
+						
+			// campo interes resultado
+			JLabel lbl_resint = new JLabel("Interes:");
+			lbl_resint.setBounds(140, 15, 100, 25);
+			lbl_resint.setFont(new Font("Arial", Font.BOLD, 16));
+			lbl_resint.setHorizontalAlignment(JLabel.RIGHT);
+			panel_rojo.add(lbl_resint);
+						
+			JTextField text_res_int = new JTextField("315.0000000000002");
+			text_res_int.setBounds(250, 15, 160, 25);
+			panel_rojo.add(text_res_int);
+						
+			// campo monto resultado
+			JLabel lbl_resmonto = new JLabel("Monto:");
+			lbl_resmonto.setBounds(140, 50, 100, 25);
+			lbl_resmonto.setFont(new Font("Arial", Font.BOLD, 16));
+			lbl_resmonto.setHorizontalAlignment(JLabel.RIGHT);
+			panel_rojo.add(lbl_resmonto);
+						
+			JTextField text_resmonto = new JTextField("1815.0000000000002");
+			text_resmonto.setBounds(250, 50, 160, 25);
+			panel_rojo.add(text_resmonto);
+						
+			calc.repaint();
+			calc.revalidate();
+			
 		}
 		
 		
