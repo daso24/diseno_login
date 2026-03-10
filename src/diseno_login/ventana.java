@@ -30,6 +30,10 @@ import javax.swing.JTextField;
 
 	public class ventana extends JFrame {
 		public ventana() {
+			
+			// icono esquina ventana
+	        ImageIcon iconoBarra = new ImageIcon("C:/Users/PC/Downloads/f.jfif"); 
+	        this.setIconImage(iconoBarra.getImage());
 		
 			// ventana principal
 			this.setSize(625,500);
@@ -62,9 +66,12 @@ import javax.swing.JTextField;
 			
 			
 			//this.setJMenuBar(barra);
+<<<<<<< Updated upstream
 			this.calculadora_layaouts();
 
 			this.setVisible(true);
+=======
+>>>>>>> Stashed changes
 	}
 	
 		public void login() {
@@ -78,13 +85,21 @@ import javax.swing.JTextField;
 			contenedor.setLocation(0, 0);
 						
 			this.add(contenedor);
+			
+			// logo dentro de la interfaz
+	        JLabel logo_empresa = new JLabel();
+	        logo_empresa.setBounds(75, 0, 1000, 100); 
+	        ImageIcon img_logo = new ImageIcon("C:/Users/PC/Downloads/Fortnite.png"); 
+	        Icon esc_logo = new ImageIcon(img_logo.getImage().getScaledInstance(300, 90, Image.SCALE_SMOOTH));
+	        logo_empresa.setIcon(esc_logo);
+	        contenedor.add(logo_empresa);
 						
 			// titulo centrado
 			JLabel title_login = new JLabel();
 			title_login.setText("ACCEDER");
 			title_login.setSize(350, 60);
 			title_login.setOpaque(true);
-			title_login.setLocation(50, 40);
+			title_login.setLocation(50, 100);
 			title_login.setBackground(Color.white);
 			title_login.setFont(new Font("Arial", Font.BOLD, 28));
 			title_login.setHorizontalAlignment(JLabel.CENTER);
@@ -92,7 +107,7 @@ import javax.swing.JTextField;
 			
 			// icono usuario
 	        JLabel icono_user = new JLabel();
-	        icono_user.setBounds(20, 175, 25, 25);
+	        icono_user.setBounds(20, 205, 25, 25);
 	        ImageIcon img_user = new ImageIcon("C:/Users/PC/Downloads/candado.jfif"); 
 	        Icon esc_user = new ImageIcon(img_user.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
 	        icono_user.setIcon(esc_user);
@@ -101,15 +116,15 @@ import javax.swing.JTextField;
 			// etiqueta nombre de usuario
 			JLabel etq_user = new JLabel();
 			etq_user.setText("NOMBRE DE USUARIO:");
-			etq_user.setSize(350, 30);
-			etq_user.setLocation(50, 140);
+			etq_user.setSize(350, 100);
+			etq_user.setLocation(50, 135);
 			etq_user.setFont(new Font("Arial", Font.BOLD, 14));
 			contenedor.add(etq_user);
 						
 			// campo de texto nombre de usuario
 			JTextField username = new JTextField();
 			username.setSize(350, 40);
-			username.setLocation(50, 170);
+			username.setLocation(50, 200);
 			username.setFont(new Font("Arial", Font.BOLD, 18));
 			contenedor.add(username);
 			
