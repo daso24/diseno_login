@@ -66,12 +66,9 @@ import javax.swing.JTextField;
 			
 			
 			//this.setJMenuBar(barra);
-<<<<<<< Updated upstream
 			this.calculadora_layaouts();
 
 			this.setVisible(true);
-=======
->>>>>>> Stashed changes
 	}
 	
 		public void login() {
