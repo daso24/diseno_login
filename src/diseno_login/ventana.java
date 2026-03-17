@@ -3,6 +3,8 @@ package diseno_login;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -66,7 +68,7 @@ import javax.swing.JTextField;
 			
 			
 			//this.setJMenuBar(barra);
-			this.calculadora_layaouts();
+			//this.calculadora_layaouts();
 
 			this.setVisible(true);
 	}
@@ -179,6 +181,19 @@ import javax.swing.JTextField;
 			acceder.setSize(350, 50);
 			acceder.setFont(new Font("Arial", Font.BOLD, 22));
 			contenedor.add(acceder);
+			
+			acceder.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String username_val = username.getText();
+					if(username_val.equals("")) {
+						username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+					}else {
+						username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+					}
+					
+				}});
 						
 			contenedor.repaint();
 			contenedor.revalidate();
