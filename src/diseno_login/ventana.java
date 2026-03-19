@@ -38,9 +38,9 @@ import javax.swing.JTextField;
 	        this.setIconImage(iconoBarra.getImage());
 		
 			// ventana principal
-			this.setSize(950,600);
-			this.setMinimumSize(new Dimension(950,600));
-			this.setMaximumSize(new Dimension(950,600));
+			this.setSize(1200,700);
+			this.setMinimumSize(new Dimension(1200,700));
+			this.setMaximumSize(new Dimension(1200,700));
 			this.setTitle("Mi ventana");
 			this.setLocation(200, 200);
 			this.setLayout(null);
@@ -79,9 +79,9 @@ import javax.swing.JTextField;
 			JPanel contenedor = new JPanel();
 			contenedor.setOpaque(true);
 			contenedor.setBackground(Color.lightGray); 
-			contenedor.setSize(450, 600);
+			contenedor.setSize(1160, 610);
 			contenedor.setLayout(null);
-			contenedor.setLocation(0, 0);
+			contenedor.setLocation(20, 20);
 						
 			this.add(contenedor);
 			
@@ -248,6 +248,18 @@ import javax.swing.JTextField;
 	        Icon esc_fondo = new ImageIcon(img_fondo.getImage().getScaledInstance(465, 460, Image.SCALE_SMOOTH));
 	        imagen_grande.setIcon(esc_fondo);
 	        panel_imagen.add(imagen_grande);
+	        
+	        JButton registro = new JButton("aun no tienes cuenta?");
+	        registro.setText("registrarse");
+	        registro.setLocation(50, 460);
+	        registro.setSize(250, 50);
+	        registro.setFont(new Font("Arial", Font.BOLD, 22));
+			contenedor.add(registro);
+			
+			registro.addActionListener(e->{
+				System.out.println("Hola");
+				System.out.println(e);
+			});
 	}
 	
 		public void register() {
@@ -736,6 +748,22 @@ import javax.swing.JTextField;
 						
 			calc.repaint();
 			calc.revalidate();
+			
+		}
+		
+		public void router(String target) {
+			this.getContentPane().removeAll();
+			
+			if(target.equals("login"))
+				this.login();
+			
+			if(target.equals("registro"))
+				this.register();
+			this.setVisible(true);
+			this.repaint();
+			this.revalidate();
+			
+			
 			
 		}
 		
