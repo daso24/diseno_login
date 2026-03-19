@@ -12,7 +12,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -38,9 +37,9 @@ import javax.swing.JTextField;
 	        this.setIconImage(iconoBarra.getImage());
 		
 			// ventana principal
-			this.setSize(625,500);
-			this.setMinimumSize(new Dimension(625, 500));
-			this.setMaximumSize(new Dimension(625, 500));
+			this.setSize(950,600);
+			this.setMinimumSize(new Dimension(950,600));
+			this.setMaximumSize(new Dimension(950,600));
 			this.setTitle("Mi ventana");
 			this.setLocation(200, 200);
 			this.setLayout(null);
@@ -194,6 +193,19 @@ import javax.swing.JTextField;
 					}
 					
 				}});
+			
+			acceder.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String contraseña_val = contraseña.getText();
+					if(contraseña_val.equals("")) {
+						contraseña.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+					}else {
+						contraseña.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+					}
+					
+				}});
 						
 			contenedor.repaint();
 			contenedor.revalidate();
@@ -331,6 +343,32 @@ import javax.swing.JTextField;
 			btn_crear.setSize(350, 50);
 			btn_crear.setFont(new Font("Arial", Font.BOLD, 22));
 			register_container.add(btn_crear);
+			
+			btn_crear.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String reg_username_val = reg_username.getText();
+					if(reg_username_val.equals("")) {
+						reg_username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+					}else {
+						reg_username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+					}
+					
+				}});
+			
+			btn_crear.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String bio_text_val = bio_text.getText();
+					if(bio_text_val.equals("")) {
+						bio_text.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+					}else {
+						bio_text.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+					}
+					
+				}});
 				
 			register_container.repaint();
 			register_container.revalidate();
