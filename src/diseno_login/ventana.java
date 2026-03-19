@@ -1,5 +1,6 @@
 package diseno_login;
 
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import java.awt.Image;
@@ -206,6 +207,29 @@ import javax.swing.JTextField;
 					}
 					
 				}});
+			
+			acceder.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			        
+			        String user_val = username.getText();
+			        String pass_val = contraseña.getText();
+
+			        if (user_val.trim().isEmpty() || pass_val.trim().isEmpty()) {
+			            
+			        	username.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+			            contraseña.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+			          
+			            JOptionPane.showMessageDialog(null, "Error: Ingrese datos", "Error de validacion", JOptionPane.ERROR_MESSAGE);
+			            
+			        } else {		  
+			            username.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+			            contraseña.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+			            
+			            JOptionPane.showMessageDialog(null, "Bienvenido", "Acceso concedido", JOptionPane.INFORMATION_MESSAGE);
+			        }
+			    }
+			});
 						
 			contenedor.repaint();
 			contenedor.revalidate();
