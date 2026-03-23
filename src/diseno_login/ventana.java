@@ -69,8 +69,9 @@ import javax.swing.JTextField;
 			
 			//this.setJMenuBar(barra);
 			//this.calculadora_layaouts();
-
+			this.router("login");
 			this.setVisible(true);
+			
 	}
 	
 		public void login() {
@@ -250,15 +251,17 @@ import javax.swing.JTextField;
 	        panel_imagen.add(imagen_grande);
 	        
 	        JButton registro = new JButton("aun no tienes cuenta?");
-	        registro.setText("registrarse");
-	        registro.setLocation(50, 460);
-	        registro.setSize(250, 50);
+	        registro.setText("Registrarse");
+	        registro.setLocation(50, 470);
+	        registro.setSize(350, 50);
 	        registro.setFont(new Font("Arial", Font.BOLD, 22));
 			contenedor.add(registro);
 			
-			registro.addActionListener(e->{
-				System.out.println("Hola");
-				System.out.println(e);
+			registro.addActionListener(new ActionListener() {
+			    @Override
+			    public void actionPerformed(ActionEvent e) {
+			        router("registro");
+			    }
 			});
 	}
 	
@@ -405,6 +408,21 @@ import javax.swing.JTextField;
 					}
 					
 				}});
+			
+			JButton cancelar = new JButton("Cancelar");
+			cancelar.setLocation(50, 520);
+			cancelar.setSize(350, 50);
+			cancelar.setFont(new Font("Arial",Font.BOLD,22));
+			register_container.add(cancelar);
+			
+			cancelar.addActionListener(e -> {
+				
+				this.router("login");
+			});
+			
+			cancelar.addActionListener(e -> {
+			    router("login");
+			});
 				
 			register_container.repaint();
 			register_container.revalidate();
@@ -753,15 +771,15 @@ import javax.swing.JTextField;
 		
 		public void router(String target) {
 			this.getContentPane().removeAll();
-			
-			if(target.equals("login"))
-				this.login();
-			
-			if(target.equals("registro"))
-				this.register();
-			this.setVisible(true);
-			this.repaint();
-			this.revalidate();
+		    
+		    if(target.equals("login")) {
+		        this.login();
+		    } else if(target.equals("registro")) {
+		        this.register(); 
+		    }
+		    
+		    this.revalidate();
+		    this.repaint();
 			
 			
 			
