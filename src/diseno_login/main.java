@@ -9,7 +9,7 @@ ventana miniventana = new ventana();
 		
 		miniventana.getContentPane().removeAll();
 		miniventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		miniventana.login();
+		miniventana.menu();
 		//miniventana.register();
 		miniventana.setVisible(true);
 		

@@ -69,10 +69,79 @@ import javax.swing.JTextField;
 			
 			//this.setJMenuBar(barra);
 			//this.calculadora_layaouts();
+			this.menu();
 			this.router("login");
 			this.setVisible(true);
 			
 	}
+		public void menu() {
+			JMenuBar barra = new JMenuBar();
+			
+			JMenu menuCuenta = new JMenu("Cuenta");
+			
+			JMenuItem itemLogin = new JMenuItem("Login");
+			itemLogin.addActionListener(e -> this.router("login"));
+			
+			JMenuItem itemRegistro = new JMenuItem("Registro");
+			itemRegistro.addActionListener(e -> this.router("registro"));
+			
+			JMenuItem itemRecuperacion = new JMenuItem("Recuperación de cuenta");
+			itemRecuperacion.addActionListener(e -> this.router("recuperacion"));
+			
+			menuCuenta.add(itemLogin);
+			menuCuenta.add(itemRegistro);
+			menuCuenta.add(itemRecuperacion);
+			
+			JMenu menuUsuarios = new JMenu("Usuarios");
+			
+			JMenuItem itemAlta = new JMenuItem("Alta");
+			itemAlta.addActionListener(e -> this.router("alta"));
+			
+			JMenuItem itemBaja = new JMenuItem("Baja");
+			itemBaja.addActionListener(e -> this.router("baja"));
+			
+			JMenuItem itemConsultar = new JMenuItem("Consultar");
+			itemConsultar.addActionListener(e -> this.router("consultar")); // Te llevará a users()
+			
+			menuUsuarios.add(itemAlta);
+			menuUsuarios.add(itemBaja);
+			menuUsuarios.add(itemConsultar);
+			
+			JMenu menuAyuda = new JMenu("Ayuda");
+			
+			JMenuItem ayudaCrear = new JMenuItem("¿Cómo crear un usuario?");
+			ayudaCrear.addActionListener(e -> JOptionPane.showMessageDialog(this, "Para crear un usuario ve a Cuenta -> Registro y llena el formulario."));
+			
+			JMenuItem ayudaAcceder = new JMenuItem("¿Cómo acceder al sistema?");
+			ayudaAcceder.addActionListener(e -> JOptionPane.showMessageDialog(this, "Ve a Cuenta -> Login e ingresa tu nombre de usuario y contraseña."));
+			
+			JMenuItem ayudaPass = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+			ayudaPass.addActionListener(e -> JOptionPane.showMessageDialog(this, "Dirígete a Cuenta -> Recuperación de cuenta para restablecerla."));
+			
+			menuAyuda.add(ayudaCrear);
+			menuAyuda.add(ayudaAcceder);
+			menuAyuda.add(ayudaPass);
+			
+			barra.add(menuCuenta);
+			barra.add(menuUsuarios);
+			barra.add(menuAyuda);
+			
+			this.setJMenuBar(barra);
+		}
+
+		public void panelPlaceholder(String titulo) {
+			JPanel panel = new JPanel();
+			panel.setSize(1200, 700);
+			panel.setLayout(null);
+			panel.setBackground(Color.lightGray);
+			this.add(panel);
+
+			JLabel label = new JLabel(titulo + " (Próximamente)");
+			label.setFont(new Font("Arial", Font.BOLD, 32));
+			label.setBounds(0, 200, 1200, 50);
+			label.setHorizontalAlignment(JLabel.CENTER);
+			panel.add(label);
+		}
 	
 		public void login() {
 		
@@ -776,13 +845,18 @@ import javax.swing.JTextField;
 		        this.login();
 		    } else if(target.equals("registro")) {
 		        this.register(); 
+		    } else if(target.equals("consultar")) {
+		        this.users(); 
+		    } else if(target.equals("recuperacion")) {
+		        this.panelPlaceholder("Recuperación de Cuenta");
+		    } else if(target.equals("alta")) {
+		        this.panelPlaceholder("Alta de Usuario");
+		    } else if(target.equals("baja")) {
+		        this.panelPlaceholder("Baja de Usuario");
 		    }
 		    
 		    this.revalidate();
 		    this.repaint();
-			
-			
-			
 		}
 		
 		
