@@ -110,13 +110,13 @@ import javax.swing.JTextField;
 			JMenu menuAyuda = new JMenu("Ayuda");
 			
 			JMenuItem ayudaCrear = new JMenuItem("¿Cómo crear un usuario?");
-			ayudaCrear.addActionListener(e -> JOptionPane.showMessageDialog(this, "Para crear un usuario ve a Cuenta -> Registro y llena el formulario."));
+			ayudaCrear.addActionListener(e -> this.router("ayuda_crear"));
 			
 			JMenuItem ayudaAcceder = new JMenuItem("¿Cómo acceder al sistema?");
-			ayudaAcceder.addActionListener(e -> JOptionPane.showMessageDialog(this, "Ve a Cuenta -> Login e ingresa tu nombre de usuario y contraseña."));
+			ayudaAcceder.addActionListener(e -> this.router("ayuda_acceder"));
 			
 			JMenuItem ayudaPass = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
-			ayudaPass.addActionListener(e -> JOptionPane.showMessageDialog(this, "Dirígete a Cuenta -> Recuperación de cuenta para restablecerla."));
+			ayudaPass.addActionListener(e -> this.router("ayuda_pass"));
 			
 			menuAyuda.add(ayudaCrear);
 			menuAyuda.add(ayudaAcceder);
@@ -848,16 +848,172 @@ import javax.swing.JTextField;
 		    } else if(target.equals("consultar")) {
 		        this.users(); 
 		    } else if(target.equals("recuperacion")) {
-		        this.panelPlaceholder("Recuperación de Cuenta");
+		        this.recuperacionView();
 		    } else if(target.equals("alta")) {
-		        this.panelPlaceholder("Alta de Usuario");
+		        this.altaUsuarioView();
+		    } else if(target.equals("ayuda_crear")) {
+		        this.ayudaCrearUsuarioView();
+		    } else if(target.equals("ayuda_acceder")) {
+		        this.ayudaAccesoSistemaView();
+		    } else if(target.equals("ayuda_pass")) {
+		        this.ayudaRecuperarContrasenaView();
 		    } else if(target.equals("baja")) {
-		        this.panelPlaceholder("Baja de Usuario");
+		        this.bajaUsuarioView();
 		    }
+		    
 		    
 		    this.revalidate();
 		    this.repaint();
 		}
+		
+		public void recuperacionView() {
+			JPanel panel = new JPanel(null);
+			panel.setSize(1200, 700);
+			panel.setBackground(Color.lightGray);
+			this.add(panel);
+
+			JLabel titulo = new JLabel("Recuperación de Cuenta");
+			titulo.setFont(new Font("Arial", Font.BOLD, 28));
+			titulo.setBounds(50, 50, 400, 40);
+			panel.add(titulo);
+
+			JLabel lblCorreo = new JLabel("Ingresa tu correo electrónico para enviarte un enlace:");
+			lblCorreo.setFont(new Font("Arial", Font.PLAIN, 16));
+			lblCorreo.setBounds(50, 120, 400, 30);
+			panel.add(lblCorreo);
+
+			JTextField txtCorreo = new JTextField();
+			txtCorreo.setBounds(50, 160, 350, 40);
+			panel.add(txtCorreo);
+
+			JButton btnEnviar = new JButton("Enviar Enlace");
+			btnEnviar.setBounds(50, 230, 150, 40);
+			panel.add(btnEnviar);
+
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.setBounds(220, 230, 150, 40);
+			btnVolver.addActionListener(e -> router("login"));
+			panel.add(btnVolver);
+		}
+
+		public void altaUsuarioView() {
+			JPanel panel = new JPanel(null);
+			panel.setSize(1200, 700);
+			panel.setBackground(Color.lightGray);
+			this.add(panel);
+
+			JLabel titulo = new JLabel("Alta de Nuevo Usuario");
+			titulo.setFont(new Font("Arial", Font.BOLD, 28));
+			titulo.setBounds(50, 50, 400, 40);
+			panel.add(titulo);
+
+			JLabel lblNombre = new JLabel("Nombre Completo:");
+			lblNombre.setBounds(50, 120, 200, 30);
+			panel.add(lblNombre);
+
+			JTextField txtNombre = new JTextField();
+			txtNombre.setBounds(50, 150, 300, 30);
+			panel.add(txtNombre);
+
+			JLabel lblRol = new JLabel("Rol del sistema:");
+			lblRol.setBounds(50, 200, 200, 30);
+			panel.add(lblRol);
+
+			JComboBox<String> cmbRol = new JComboBox<>(new String[]{"Administrador", "Empleado", "Cliente"});
+			cmbRol.setBounds(50, 230, 300, 30);
+			panel.add(cmbRol);
+
+			JButton btnGuardar = new JButton("Guardar Usuario");
+			btnGuardar.setBounds(50, 300, 150, 40);
+			panel.add(btnGuardar);
+
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.setBounds(220, 300, 150, 40);
+			btnVolver.addActionListener(e -> router("consultar"));
+			panel.add(btnVolver);
+		}
+		
+		public void bajaUsuarioView() {
+			JPanel panel = new JPanel(null);
+			panel.setSize(1200, 700);
+			panel.setBackground(Color.lightGray);
+			this.add(panel);
+
+			JLabel titulo = new JLabel("Baja de Usuario");
+			titulo.setFont(new Font("Arial", Font.BOLD, 28));
+			titulo.setBounds(50, 50, 400, 40);
+			panel.add(titulo);
+
+			JLabel lblBuscar = new JLabel("Ingresa el No. de Control del usuario a eliminar:");
+			lblBuscar.setFont(new Font("Arial", Font.PLAIN, 16));
+			lblBuscar.setBounds(50, 120, 450, 30);
+			panel.add(lblBuscar);
+
+			JTextField txtBuscar = new JTextField();
+			txtBuscar.setBounds(50, 160, 350, 40);
+			panel.add(txtBuscar);
+
+			JButton btnEliminar = new JButton("Eliminar Usuario");
+			btnEliminar.setBounds(50, 230, 150, 40);
+			btnEliminar.setBackground(new Color(220, 53, 69)); // Rojo para botón de eliminar
+			btnEliminar.setForeground(Color.WHITE);
+			panel.add(btnEliminar);
+
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.setBounds(220, 230, 150, 40);
+			btnVolver.addActionListener(e -> router("consultar")); // Regresa a la tabla de usuarios
+			panel.add(btnVolver);
+		}
+
+		public void ayudaCrearUsuarioView() {
+			crearPanelAyuda("¿Cómo crear un usuario?", 
+				"1. Dirígete a la sección 'Cuenta' en el menú superior.\n" +
+				"2. Selecciona la opción 'Registro'.\n" +
+				"3. Llena todos los campos solicitados en el formulario.\n" +
+				"4. Haz clic en el botón 'Crear cuenta'.");
+		}
+
+		public void ayudaAccesoSistemaView() {
+			crearPanelAyuda("¿Cómo acceder al sistema?", 
+				"1. Asegúrate de estar registrado en el sistema.\n" +
+				"2. En el menú, ve a 'Cuenta' -> 'Login'.\n" +
+				"3. Ingresa tu nombre de usuario y contraseña.\n" +
+				"4. Haz clic en el botón 'Entrar'.");
+		}
+
+		public void ayudaRecuperarContrasenaView() {
+			crearPanelAyuda("¿Qué pasa si olvidé mi contraseña?", 
+				"1. Ve a la sección 'Cuenta' -> 'Recuperación de cuenta'.\n" +
+				"2. Ingresa el correo electrónico asociado a tu usuario.\n" +
+				"3. Revisa tu bandeja de entrada y sigue las instrucciones del correo.");
+		}
+
+		private void crearPanelAyuda(String tituloText, String contenido) {
+			JPanel panel = new JPanel(null);
+			panel.setSize(1200, 700);
+			panel.setBackground(Color.white);
+			this.add(panel);
+
+			JLabel titulo = new JLabel(tituloText);
+			titulo.setFont(new Font("Arial", Font.BOLD, 28));
+			titulo.setBounds(50, 50, 600, 40);
+			panel.add(titulo);
+
+			JTextArea txtContenido = new JTextArea(contenido);
+			txtContenido.setFont(new Font("Arial", Font.PLAIN, 18));
+			txtContenido.setBounds(50, 120, 600, 150);
+			txtContenido.setEditable(false);
+			txtContenido.setBorder(BorderFactory.createLineBorder(Color.gray));
+			panel.add(txtContenido);
+
+			JButton btnVolver = new JButton("Volver al Inicio");
+			btnVolver.setBounds(50, 300, 150, 40);
+			btnVolver.addActionListener(e -> router("login"));
+			panel.add(btnVolver);
+		}
+	
+		
+		
 		
 		
 	
