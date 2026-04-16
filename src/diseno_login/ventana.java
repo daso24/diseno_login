@@ -29,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 	public class ventana extends JFrame {
 		public ventana() {
@@ -69,9 +70,9 @@ import javax.swing.JTextField;
 			
 			//this.setJMenuBar(barra);
 			//this.calculadora_layaouts();
-			this.menu();
-			this.router("login");
-			this.setVisible(true);
+			//this.menu();
+			//this.router("login");
+			//this.setVisible(true);
 			
 	}
 		public void menu() {
@@ -1011,12 +1012,27 @@ import javax.swing.JTextField;
 			btnVolver.addActionListener(e -> router("login"));
 			panel.add(btnVolver);
 		}
-	
 		
+		public void mostrarTicTacToe() {
+			this.getContentPane().removeAll();
+			this.setLayout(new BorderLayout());
+
+			JPanel panelTablero = new JPanel();
+		    panelTablero.setLayout(new GridLayout(3, 3));
+		    Font fuenteBotones = new Font("SansSerif", Font.BOLD, 60);
+
+		    for (int i = 0; i < 9; i++) {
+		         JButton boton = new JButton("");
+		         boton.setFont(fuenteBotones);
+		         boton.setBackground(Color.WHITE);
+		         boton.setFocusPainted(false);
+		         panelTablero.add(boton);
+		     }
+
+		    	this.add(panelTablero, BorderLayout.CENTER);
+		        this.revalidate();
+		        this.repaint();
+		    }
 		
-		
-		
-	
-	
 
 }
