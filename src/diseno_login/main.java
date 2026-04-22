@@ -10,7 +10,7 @@ public class main {
 		
 		//miniventana.getContentPane().removeAll();
 		miniventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		miniventana.mostrarTicTacToe();
+		miniventana.menu();
 		//miniventana.register();
 		miniventana.setVisible(true);
 		

@@ -102,7 +102,7 @@ import javax.swing.SwingUtilities;
 			itemBaja.addActionListener(e -> this.router("baja"));
 			
 			JMenuItem itemConsultar = new JMenuItem("Consultar");
-			itemConsultar.addActionListener(e -> this.router("consultar")); // Te llevará a users()
+			itemConsultar.addActionListener(e -> this.router("consultar")); 
 			
 			menuUsuarios.add(itemAlta);
 			menuUsuarios.add(itemBaja);
@@ -956,13 +956,13 @@ import javax.swing.SwingUtilities;
 
 			JButton btnEliminar = new JButton("Eliminar Usuario");
 			btnEliminar.setBounds(50, 230, 150, 40);
-			btnEliminar.setBackground(new Color(220, 53, 69)); // Rojo para botón de eliminar
+			btnEliminar.setBackground(new Color(220, 53, 69));
 			btnEliminar.setForeground(Color.WHITE);
 			panel.add(btnEliminar);
 
 			JButton btnVolver = new JButton("Volver");
 			btnVolver.setBounds(220, 230, 150, 40);
-			btnVolver.addActionListener(e -> router("consultar")); // Regresa a la tabla de usuarios
+			btnVolver.addActionListener(e -> router("consultar")); 
 			panel.add(btnVolver);
 		}
 
