@@ -32,6 +32,28 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 	public class ventana extends JFrame {
+		private boolean turnoX = true; 
+	    private String[] tableroLogico = new String[9]; 
+	    private BotonGato[] botonesGato = new BotonGato[9];
+	    private int victoriasX = 0;
+	    private int victoriasO = 0;
+	    private JLabel lblMarcadorX;
+	    private JLabel lblMarcadorO;
+	    
+	    public class BotonGato extends JButton {
+	        private int posicion;
+
+	        public BotonGato(int posicion) {
+	            this.posicion = posicion;
+	            this.setFont(new Font("SansSerif", Font.BOLD, 60));
+	            this.setBackground(Color.WHITE);
+	            this.setFocusPainted(false);
+	        }
+
+	        public int getPosicion() {
+	            return posicion;
+	        }
+	    }
 		public ventana() {
 			
 			// icono esquina ventana
@@ -1015,24 +1037,124 @@ import javax.swing.SwingUtilities;
 		
 		public void mostrarTicTacToe() {
 			this.getContentPane().removeAll();
-			this.setLayout(new BorderLayout());
+	        this.setLayout(new BorderLayout());
 
-			JPanel panelTablero = new JPanel();
-		    panelTablero.setLayout(new GridLayout(3, 3));
-		    Font fuenteBotones = new Font("SansSerif", Font.BOLD, 60);
+	        // inicializa el tablero 
+	        for (int i = 0; i < 9; i++) {
+	            tableroLogico[i] = "";
+	        }
+	        turnoX = true;
 
-		    for (int i = 0; i < 9; i++) {
-		         JButton boton = new JButton("");
-		         boton.setFont(fuenteBotones);
-		         boton.setBackground(Color.WHITE);
-		         boton.setFocusPainted(false);
-		         panelTablero.add(boton);
-		     }
+	        // marcador y historial
+	        JPanel panelMarcador = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+	        panelMarcador.setBackground(Color.lightGray);
+	        
+	        lblMarcadorX = new JLabel("Victorias X: " + victoriasX);
+	        lblMarcadorX.setFont(new Font("Arial", Font.BOLD, 20));
+	        lblMarcadorX.setForeground(Color.BLUE);
+	        
+	        lblMarcadorO = new JLabel("Victorias O: " + victoriasO);
+	        lblMarcadorO.setFont(new Font("Arial", Font.BOLD, 20));
+	        lblMarcadorO.setForeground(Color.RED);
+	        
+	        JButton btnReiniciar = new JButton("Reiniciar Partida");
+	        btnReiniciar.setFont(new Font("Arial", Font.BOLD, 16));
+	        btnReiniciar.addActionListener(e -> reiniciarJuego());
 
-		    	this.add(panelTablero, BorderLayout.CENTER);
-		        this.revalidate();
-		        this.repaint();
-		    }
+	        panelMarcador.add(lblMarcadorX);
+	        panelMarcador.add(btnReiniciar);
+	        panelMarcador.add(lblMarcadorO);
+	        this.add(panelMarcador, BorderLayout.NORTH);
+
+	        // tablero 3x3
+	        JPanel panelTablero = new JPanel();
+	        panelTablero.setLayout(new GridLayout(3, 3));
+
+	        ActionListener accionJugar = new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                BotonGato botonClickeado = (BotonGato) e.getSource();
+	                int pos = botonClickeado.getPosicion();
+
+	                if (tableroLogico[pos].equals("")) {
+	                    String simbolo = turnoX ? "X" : "O";
+	                    
+	                    botonClickeado.setText(simbolo);
+	                    botonClickeado.setForeground(turnoX ? Color.BLUE : Color.RED);
+	                    
+	                    tableroLogico[pos] = simbolo;
+
+	                    if (verificarGanador(simbolo)) {
+	                        if (turnoX) {
+	                            victoriasX++;
+	                            lblMarcadorX.setText("Victorias X: " + victoriasX);
+	                        } else {
+	                            victoriasO++;
+	                            lblMarcadorO.setText("Victorias O: " + victoriasO);
+	                        }
+	                        bloquearTablero(); 
+	                        JOptionPane.showMessageDialog(null, "El jugador " + simbolo + " ha ganado", "Tenemos un ganador", JOptionPane.INFORMATION_MESSAGE);
+	                    } else if (verificarEmpate()) {
+	                        JOptionPane.showMessageDialog(null, "Es un empate", "Tablero lleno", JOptionPane.WARNING_MESSAGE);
+	                    } else {
+	                        turnoX = !turnoX;
+	                    }
+	                }
+	            }
+	        };
+
+	        // botones
+	        for (int i = 0; i < 9; i++) {
+	            botonesGato[i] = new BotonGato(i);
+	            botonesGato[i].addActionListener(accionJugar);
+	            panelTablero.add(botonesGato[i]);
+	        }
+
+	        this.add(panelTablero, BorderLayout.CENTER);
+	        this.revalidate();
+	        this.repaint();
+	    }
 		
+		private boolean verificarGanador(String jugador) {
+	        // valida filas horizontal
+	        if (tableroLogico[0].equals(jugador) && tableroLogico[1].equals(jugador) && tableroLogico[2].equals(jugador)) return true;
+	        if (tableroLogico[3].equals(jugador) && tableroLogico[4].equals(jugador) && tableroLogico[5].equals(jugador)) return true;
+	        if (tableroLogico[6].equals(jugador) && tableroLogico[7].equals(jugador) && tableroLogico[8].equals(jugador)) return true;
+	        
+	        // valida columnas vertical
+	        if (tableroLogico[0].equals(jugador) && tableroLogico[3].equals(jugador) && tableroLogico[6].equals(jugador)) return true;
+	        if (tableroLogico[1].equals(jugador) && tableroLogico[4].equals(jugador) && tableroLogico[7].equals(jugador)) return true;
+	        if (tableroLogico[2].equals(jugador) && tableroLogico[5].equals(jugador) && tableroLogico[8].equals(jugador)) return true;
+	        
+	        // valida diagonales
+	        if (tableroLogico[0].equals(jugador) && tableroLogico[4].equals(jugador) && tableroLogico[8].equals(jugador)) return true;
+	        if (tableroLogico[2].equals(jugador) && tableroLogico[4].equals(jugador) && tableroLogico[6].equals(jugador)) return true;
 
+	        return false; 
+	    }
+
+	    private boolean verificarEmpate() {
+	        for (String casilla : tableroLogico) {
+	            if (casilla.equals("")) {
+	                return false;
+	            }
+	        }
+	        return true; 
+	    }
+
+	    private void bloquearTablero() {
+	        for (int i = 0; i < 9; i++) {
+	            if (tableroLogico[i].equals("")) {
+	                tableroLogico[i] = "-"; 
+	            }
+	        }
+	    }
+
+	    private void reiniciarJuego() {
+	        turnoX = true; 
+	        for (int i = 0; i < 9; i++) {
+	            tableroLogico[i] = ""; 
+	            botonesGato[i].setText(""); 
+	        }
+	    }   
 }
