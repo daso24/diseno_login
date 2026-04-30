@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -26,23 +25,32 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class AuthView {
+	
+	public JFrame frameLogin;
+	public JFrame frameRegistro;
+	public JButton btnIrRegistro;
+	public JButton btnCrearCuenta;
+	public JButton btnCancelarRegistro;
+	public JTextField reg_username;
+	public JTextArea bio_text;
+
 	public AuthView() {
 		
 	}
+	
 	public void loginView() {
-		JFrame ventana = new JFrame();
+		frameLogin = new JFrame();
 		// icono esquina ventana
         ImageIcon iconoBarra = new ImageIcon("C:/Users/PC/Downloads/f.jfif"); 
-        ventana.setIconImage(iconoBarra.getImage());
+        frameLogin.setIconImage(iconoBarra.getImage());
 	
 		// ventana principal
-        ventana.setSize(1200,700);
-        ventana.setMinimumSize(new Dimension(1200,700));
-        ventana.setMaximumSize(new Dimension(1200,700));
-        ventana.setTitle("Mi ventana");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setLocation(200, 200);
-        ventana.setLayout(null);
+        frameLogin.setSize(1200,700);
+        frameLogin.setMinimumSize(new Dimension(1200,700));
+        frameLogin.setMaximumSize(new Dimension(1200,700));
+        frameLogin.setTitle("Mi ventana");
+        frameLogin.setLocation(200, 200);
+        frameLogin.setLayout(null);
 			
 		JMenuBar barra = new JMenuBar();
 		JMenu archivo = new JMenu("Archivo");
@@ -73,8 +81,8 @@ public class AuthView {
 		contenedor.setLayout(null);
 		contenedor.setLocation(20, 20);
 					
-		ventana.add(contenedor);
-		
+		frameLogin.add(contenedor);
+					
 		// logo dentro de la interfaz
         JLabel logo_empresa = new JLabel();
         logo_empresa.setBounds(75, 0, 1000, 100); 
@@ -93,7 +101,7 @@ public class AuthView {
 		title_login.setFont(new Font("Arial", Font.BOLD, 28));
 		title_login.setHorizontalAlignment(JLabel.CENTER);
 		contenedor.add(title_login);
-		
+					
 		// icono usuario
         JLabel icono_user = new JLabel();
         icono_user.setBounds(20, 205, 25, 25);
@@ -116,7 +124,7 @@ public class AuthView {
 		username.setLocation(50, 200);
 		username.setFont(new Font("Arial", Font.BOLD, 18));
 		contenedor.add(username);
-		
+					
 		// icono contraseña
         JLabel icono_pass = new JLabel();
         icono_pass.setBounds(20, 275, 25, 25);
@@ -162,7 +170,7 @@ public class AuthView {
 		olvido_contra.setSize(180, 20);
 		olvido_contra.setLocation(230, 330);
 		olvido_contra.setFont(new Font("Arial", Font.BOLD, 14));
-					contenedor.add(olvido_contra);
+		contenedor.add(olvido_contra);
 					
 		// boton acceder inferior
 		JButton acceder = new JButton();
@@ -171,9 +179,8 @@ public class AuthView {
 		acceder.setSize(350, 50);
 		acceder.setFont(new Font("Arial", Font.BOLD, 22));
 		contenedor.add(acceder);
-		
+					
 		acceder.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String username_val = username.getText();
@@ -182,11 +189,10 @@ public class AuthView {
 				}else {
 					username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
-				
-			}});
-		
+			}
+		});
+					
 		acceder.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String contraseña_val = contraseña.getText();
@@ -195,27 +201,22 @@ public class AuthView {
 				}else {
 					contraseña.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
-				
-			}});
-		
+			}
+		});
+					
 		acceder.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		        
 		        String user_val = username.getText();
 		        String pass_val = contraseña.getText();
 
 		        if (user_val.trim().isEmpty() || pass_val.trim().isEmpty()) {
-		            
 		        	username.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 		            contraseña.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-		          
 		            JOptionPane.showMessageDialog(null, "Error: Ingrese datos", "Error de validacion", JOptionPane.ERROR_MESSAGE);
-		            
 		        } else {		  
 		            username.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
 		            contraseña.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-		            
 		            JOptionPane.showMessageDialog(null, "Bienvenido", "Acceso concedido", JOptionPane.INFORMATION_MESSAGE);
 		        }
 		    }
@@ -223,13 +224,13 @@ public class AuthView {
 					
 		contenedor.repaint();
 		contenedor.revalidate();
-		
+					
 		// panel imagen grande
         JPanel panel_imagen = new JPanel();
         panel_imagen.setSize(465, 600);
         panel_imagen.setLocation(450, 0);
         panel_imagen.setLayout(null);
-        ventana.add(panel_imagen);
+        frameLogin.add(panel_imagen);
 
         JLabel imagen_grande = new JLabel();
         imagen_grande.setSize(465, 600);
@@ -239,39 +240,29 @@ public class AuthView {
         imagen_grande.setIcon(esc_fondo);
         panel_imagen.add(imagen_grande);
         
-        JButton registro = new JButton("aun no tienes cuenta?");
-        registro.setText("Registrarse");
-        registro.setLocation(50, 470);
-        registro.setSize(350, 50);
-        registro.setFont(new Font("Arial", Font.BOLD, 22));
-		contenedor.add(registro);
+        btnIrRegistro = new JButton("aun no tienes cuenta?");
+        btnIrRegistro.setText("Registrarse");
+        btnIrRegistro.setLocation(50, 470);
+        btnIrRegistro.setSize(350, 50);
+        btnIrRegistro.setFont(new Font("Arial", Font.BOLD, 22));
+		contenedor.add(btnIrRegistro);
 		
-		registro.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		     //   router("registro"); 
-		    	ventana.dispose();
-		        new AuthView().registerView();
-		    	
-		    }
-		});
-		ventana.setVisible(true);
-}
+		frameLogin.setVisible(true);
+	}
 	
 	public void registerView() {
-		JFrame ventana = new JFrame();
+		frameRegistro = new JFrame();
 		// icono esquina ventana
         ImageIcon iconoBarra = new ImageIcon("C:/Users/PC/Downloads/f.jfif"); 
-        ventana.setIconImage(iconoBarra.getImage());
+        frameRegistro.setIconImage(iconoBarra.getImage());
 	
 		// ventana principal
-        ventana.setSize(1200,700);
-        ventana.setMinimumSize(new Dimension(1200,700));
-        ventana.setMaximumSize(new Dimension(1200,700));
-        ventana.setTitle("Mi ventana");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setLocation(200, 200);
-        ventana.setLayout(null);
+        frameRegistro.setSize(1200,700);
+        frameRegistro.setMinimumSize(new Dimension(1200,700));
+        frameRegistro.setMaximumSize(new Dimension(1200,700));
+        frameRegistro.setTitle("Mi ventana");
+        frameRegistro.setLocation(200, 200);
+        frameRegistro.setLayout(null);
 			
 		JMenuBar barra = new JMenuBar();
 		JMenu archivo = new JMenu("Archivo");
@@ -294,15 +285,14 @@ public class AuthView {
 		submenu.add(menuitem);
 		archivo.add(submenu);
 		
-		
-		// pabel lado derecho
+		// panel lado derecho
 		JPanel register_container = new JPanel();
 		register_container.setOpaque(true);
 		register_container.setBackground(Color.lightGray); 
 		register_container.setSize(450, 600);
 		register_container.setLayout(null);
 		register_container.setLocation(450, 0); 
-		ventana.add(register_container);
+		frameRegistro.add(register_container);
 			
 		// titulo Registro
 		JLabel title_register = new JLabel();
@@ -324,8 +314,7 @@ public class AuthView {
 		reg_user_tag.setFont(new Font("Arial", Font.BOLD, 14));
 		register_container.add(reg_user_tag);
 			
-		// campo de texto nombre de usuario
-		JTextField reg_username = new JTextField();
+		reg_username = new JTextField();
 		reg_username.setBounds(50, 140, 350, 35);
 		reg_username.setFont(new Font("Arial", Font.BOLD, 18));
 		register_container.add(reg_username);
@@ -337,8 +326,7 @@ public class AuthView {
 		bio_tag.setFont(new Font("Arial", Font.BOLD, 14));
 		register_container.add(bio_tag);
 			
-		// area de texto bio
-		JTextArea bio_text = new JTextArea();
+		bio_text = new JTextArea();
 		bio_text.setBounds(50, 210, 350, 60);
 		bio_text.setFont(new Font("Arial", Font.PLAIN, 14));
 		bio_text.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
@@ -392,7 +380,6 @@ public class AuthView {
 		reject_terms.setFont(new Font("Arial", Font.BOLD, 12));
 		register_container.add(reject_terms);
 			
-		// condicion de radiobuttons para que solo se seleccione uno
 		ButtonGroup terms_group = new ButtonGroup();
 		terms_group.add(accept_terms);
 		terms_group.add(reject_terms);
@@ -404,16 +391,14 @@ public class AuthView {
 		list.setFont(new Font("Arial", Font.BOLD, 12));
 		register_container.add(list);
 			
-		// boton crear cuenta inferior
-		JButton btn_crear = new JButton();
-		btn_crear.setText("Crear cuenta");
-		btn_crear.setLocation(50, 460);
-		btn_crear.setSize(350, 50);
-		btn_crear.setFont(new Font("Arial", Font.BOLD, 22));
-		register_container.add(btn_crear);
+		btnCrearCuenta = new JButton();
+		btnCrearCuenta.setText("Crear cuenta");
+		btnCrearCuenta.setLocation(50, 460);
+		btnCrearCuenta.setSize(350, 50);
+		btnCrearCuenta.setFont(new Font("Arial", Font.BOLD, 22));
+		register_container.add(btnCrearCuenta);
 		
-		btn_crear.addActionListener(new ActionListener() {
-
+		btnCrearCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String reg_username_val = reg_username.getText();
@@ -422,11 +407,10 @@ public class AuthView {
 				}else {
 					reg_username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
-				
-			}});
+			}
+		});
 		
-		btn_crear.addActionListener(new ActionListener() {
-
+		btnCrearCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String bio_text_val = bio_text.getText();
@@ -435,28 +419,18 @@ public class AuthView {
 				}else {
 					bio_text.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}
-				
-			}});
-		
-		JButton cancelar = new JButton("Cancelar");
-		cancelar.setLocation(50, 520);
-		cancelar.setSize(350, 50);
-		cancelar.setFont(new Font("Arial",Font.BOLD,22));
-		register_container.add(cancelar);
-		
-		cancelar.addActionListener(e -> {
-			ventana.dispose();
-	        new AuthView().loginView();
-			
-		//	this.router("login");
+			}
 		});
 		
+		btnCancelarRegistro = new JButton("Cancelar");
+		btnCancelarRegistro.setLocation(50, 520);
+		btnCancelarRegistro.setSize(350, 50);
+		btnCancelarRegistro.setFont(new Font("Arial",Font.BOLD,22));
+		register_container.add(btnCancelarRegistro);
 			
 		register_container.repaint();
 		register_container.revalidate();
 		
-		ventana.setVisible(true);
-		
+		frameRegistro.setVisible(true);
 	}
-
 }
