@@ -10,12 +10,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -31,11 +27,15 @@ public class AuthView {
     public JButton btnIrRegistro;
     public JButton btnCrearCuenta;
     public JButton btnCancelarRegistro;
+    
     public JTextField reg_username;
+    public JTextField reg_email;
+    public JTextField reg_password;
     public JTextArea bio_text;
+    public JCheckBox sweet_opcion, salty_option, healthy_option;
+    public JRadioButton accept_terms, reject_terms;
 
     public AuthView() {
-
     }
 
     public void loginView() {
@@ -45,32 +45,8 @@ public class AuthView {
         frameLogin.setIconImage(iconoBarra.getImage());
 
         frameLogin.setSize(1200, 700);
-        frameLogin.setMinimumSize(new Dimension(1200, 700));
-        frameLogin.setMaximumSize(new Dimension(1200, 700));
-        frameLogin.setTitle("Mi ventana");
         frameLogin.setLocation(200, 200);
         frameLogin.setLayout(null);
-
-        JMenuBar barra = new JMenuBar();
-        JMenu archivo = new JMenu("Archivo");
-        JMenuItem open = new JMenuItem("Abrir");
-        JMenuItem close = new JMenuItem("Cerrar");
-        JMenuItem save = new JMenuItem("Guardar");
-        JMenuItem newfile = new JMenuItem("Nuevo");
-        archivo.add(open);
-        archivo.add(close);
-        archivo.add(save);
-        archivo.add(newfile);
-        barra.add(archivo);
-
-        JMenu submenu = new JMenu("otros");
-        archivo.addSeparator();
-        JMenuItem menuitem = new JMenuItem("un item al menu");
-        submenu.add(menuitem);
-
-        menuitem = new JMenuItem("otro item");
-        submenu.add(menuitem);
-        archivo.add(submenu);
 
         JPanel contenedor = new JPanel();
         contenedor.setOpaque(true);
@@ -78,7 +54,6 @@ public class AuthView {
         contenedor.setSize(1160, 610);
         contenedor.setLayout(null);
         contenedor.setLocation(20, 20);
-
         frameLogin.add(contenedor);
 
         JLabel logo_empresa = new JLabel();
@@ -88,8 +63,7 @@ public class AuthView {
         logo_empresa.setIcon(esc_logo);
         contenedor.add(logo_empresa);
 
-        JLabel title_login = new JLabel();
-        title_login.setText("ACCEDER");
+        JLabel title_login = new JLabel("ACCEDER");
         title_login.setSize(350, 60);
         title_login.setOpaque(true);
         title_login.setLocation(50, 100);
@@ -98,17 +72,9 @@ public class AuthView {
         title_login.setHorizontalAlignment(JLabel.CENTER);
         contenedor.add(title_login);
 
-        JLabel icono_user = new JLabel();
-        icono_user.setBounds(20, 205, 25, 25);
-        ImageIcon img_user = new ImageIcon("C:/Users/PC/Downloads/candado.jfif"); 
-        Icon esc_user = new ImageIcon(img_user.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        icono_user.setIcon(esc_user);
-        contenedor.add(icono_user);
-
-        JLabel etq_user = new JLabel();
-        etq_user.setText("NOMBRE DE USUARIO:");
-        etq_user.setSize(350, 100);
-        etq_user.setLocation(50, 135);
+        JLabel etq_user = new JLabel("Correo electronico:");
+        etq_user.setSize(350, 30);
+        etq_user.setLocation(50, 170);
         etq_user.setFont(new Font("Arial", Font.BOLD, 14));
         contenedor.add(etq_user);
 
@@ -118,15 +84,7 @@ public class AuthView {
         username.setFont(new Font("Arial", Font.BOLD, 18));
         contenedor.add(username);
 
-        JLabel icono_pass = new JLabel();
-        icono_pass.setBounds(20, 275, 25, 25);
-        ImageIcon img_pass = new ImageIcon("C:/Users/PC/Downloads/user.jfif"); 
-        Icon esc_pass = new ImageIcon(img_pass.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        icono_pass.setIcon(esc_pass);
-        contenedor.add(icono_pass);
-
-        JLabel etq_contra = new JLabel();
-        etq_contra.setText("CONTRASEÑA:");
+        JLabel etq_contra = new JLabel("Contraseña:");
         etq_contra.setSize(350, 30);
         etq_contra.setLocation(50, 240);
         etq_contra.setFont(new Font("Arial", Font.BOLD, 14));
@@ -138,36 +96,17 @@ public class AuthView {
         contraseña.setFont(new Font("Arial", Font.BOLD, 18));
         contenedor.add(contraseña);
 
-        JLabel casilla = new JLabel();
-        casilla.setSize(20, 20);
-        casilla.setOpaque(true);
-        casilla.setLocation(50, 330);
-        casilla.setBackground(Color.white);
-        contenedor.add(casilla);
-
-        JLabel recordarme = new JLabel();
-        recordarme.setText("Recordarme");
-        recordarme.setSize(100, 20);
-        recordarme.setLocation(80, 330);
-        recordarme.setFont(new Font("Arial", Font.BOLD, 14));
-        contenedor.add(recordarme);
-
-        JLabel olvido_contra = new JLabel();
-        olvido_contra.setText("¿Olvidó su contraseña?");
-        olvido_contra.setSize(180, 20);
-        olvido_contra.setLocation(230, 330);
-        olvido_contra.setFont(new Font("Arial", Font.BOLD, 14));
-        contenedor.add(olvido_contra);
-
-        acceder = new JButton();
-        acceder.setText("Entrar");
-        acceder.setLocation(50, 410);
+        acceder = new JButton("Entrar");
+        acceder.setLocation(50, 350);
         acceder.setSize(350, 50);
         acceder.setFont(new Font("Arial", Font.BOLD, 22));
         contenedor.add(acceder);
 
-        contenedor.repaint();
-        contenedor.revalidate();
+        btnIrRegistro = new JButton("Registrarse");
+        btnIrRegistro.setLocation(50, 420);
+        btnIrRegistro.setSize(350, 50);
+        btnIrRegistro.setFont(new Font("Arial", Font.BOLD, 22));
+        contenedor.add(btnIrRegistro);
 
         JPanel panel_imagen = new JPanel();
         panel_imagen.setSize(465, 600);
@@ -183,162 +122,113 @@ public class AuthView {
         imagen_grande.setIcon(esc_fondo);
         panel_imagen.add(imagen_grande);
 
-        btnIrRegistro = new JButton("aun no tienes cuenta?");
-        btnIrRegistro.setText("Registrarse");
-        btnIrRegistro.setLocation(50, 470);
-        btnIrRegistro.setSize(350, 50);
-        btnIrRegistro.setFont(new Font("Arial", Font.BOLD, 22));
-        contenedor.add(btnIrRegistro);
-
         frameLogin.setVisible(true);
     }
 
     public void registerView() {
         frameRegistro = new JFrame();
         frameRegistro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon iconoBarra = new ImageIcon("C:/Users/PC/Downloads/f.jfif"); 
-        frameRegistro.setIconImage(iconoBarra.getImage());
-
         frameRegistro.setSize(1200, 700);
-        frameRegistro.setMinimumSize(new Dimension(1200, 700));
-        frameRegistro.setMaximumSize(new Dimension(1200, 700));
-        frameRegistro.setTitle("Mi ventana");
         frameRegistro.setLocation(200, 200);
         frameRegistro.setLayout(null);
 
-        JMenuBar barra = new JMenuBar();
-        JMenu archivo = new JMenu("Archivo");
-        JMenuItem open = new JMenuItem("Abrir");
-        JMenuItem close = new JMenuItem("Cerrar");
-        JMenuItem save = new JMenuItem("Guardar");
-        JMenuItem newfile = new JMenuItem("Nuevo");
-        archivo.add(open);
-        archivo.add(close);
-        archivo.add(save);
-        archivo.add(newfile);
-        barra.add(archivo);
+        JPanel left_panel = new JPanel();
+        left_panel.setBounds(50, 50, 500, 550);
+        left_panel.setBackground(Color.lightGray);
+        left_panel.setLayout(null);
+        frameRegistro.add(left_panel);
 
-        JMenu submenu = new JMenu("otros");
-        archivo.addSeparator();
-        JMenuItem menuitem = new JMenuItem("un item al menu");
-        submenu.add(menuitem);
+        JLabel title_reg = new JLabel("Registro");
+        title_reg.setBounds(50, 20, 400, 50);
+        title_reg.setOpaque(true);
+        title_reg.setBackground(Color.white);
+        title_reg.setFont(new Font("Arial", Font.BOLD, 24));
+        title_reg.setHorizontalAlignment(JLabel.CENTER);
+        left_panel.add(title_reg);
 
-        menuitem = new JMenuItem("otro item");
-        submenu.add(menuitem);
-        archivo.add(submenu);
-
-        JPanel register_container = new JPanel();
-        register_container.setOpaque(true);
-        register_container.setBackground(Color.lightGray); 
-        register_container.setSize(450, 600);
-        register_container.setLayout(null);
-        register_container.setLocation(450, 0); 
-        frameRegistro.add(register_container);
-
-        JLabel title_register = new JLabel();
-        title_register.setText("REGISTRO");
-        title_register.setSize(350, 60);
-        title_register.setOpaque(true);
-        title_register.setLocation(50, 40);
-        title_register.setBackground(Color.white); 
-        title_register.setFont(new Font("Arial", Font.BOLD, 28));
-        title_register.setHorizontalAlignment(JLabel.CENTER);
-        register_container.add(title_register);
-
-        JLabel reg_user_tag = new JLabel("NOMBRE DE USUARIO:");
-        reg_user_tag.setBounds(50, 115, 350, 25);
-        reg_user_tag.setBackground(Color.lightGray);
-        reg_user_tag.setOpaque(true);
-        reg_user_tag.setHorizontalAlignment(JLabel.CENTER);
-        reg_user_tag.setFont(new Font("Arial", Font.BOLD, 14));
-        register_container.add(reg_user_tag);
-
+        JLabel lbl_u = new JLabel("Nombre de usuario:");
+        lbl_u.setBounds(50, 100, 400, 25);
+        lbl_u.setFont(new Font("Arial", Font.BOLD, 14));
+        left_panel.add(lbl_u);
         reg_username = new JTextField();
-        reg_username.setBounds(50, 140, 350, 35);
         reg_username.setFont(new Font("Arial", Font.BOLD, 18));
-        register_container.add(reg_username);
+        reg_username.setBounds(50, 125, 400, 40);
+        left_panel.add(reg_username);
 
-        JLabel bio_tag = new JLabel("BIO");
-        bio_tag.setBounds(50, 185, 350, 25);
-        bio_tag.setHorizontalAlignment(JLabel.CENTER);
-        bio_tag.setFont(new Font("Arial", Font.BOLD, 14));
-        register_container.add(bio_tag);
+        JLabel lbl_e = new JLabel("Correo electronico:");
+        lbl_e.setBounds(50, 180, 400, 25);
+        lbl_e.setFont(new Font("Arial", Font.BOLD, 14));
+        left_panel.add(lbl_e);
+        reg_email = new JTextField();
+        reg_email.setFont(new Font("Arial", Font.BOLD, 18));
+        reg_email.setBounds(50, 205, 400, 40);
+        left_panel.add(reg_email);
 
-        bio_text = new JTextArea();
-        bio_text.setBounds(50, 210, 350, 60);
-        bio_text.setFont(new Font("Arial", Font.PLAIN, 14));
-        bio_text.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-        register_container.add(bio_text);
+        JLabel lbl_p = new JLabel("Contraseña:");
+        lbl_p.setBounds(50, 260, 400, 25);
+        lbl_p.setFont(new Font("Arial", Font.BOLD, 14));
+        left_panel.add(lbl_p);
+        reg_password = new JTextField();
+        reg_password.setFont(new Font("Arial", Font.BOLD, 18));
+        reg_password.setBounds(50, 285, 400, 40);
+        left_panel.add(reg_password);
 
-        JLabel pref_tag = new JLabel("PREFERENCIAS");
-        pref_tag.setBounds(50, 280, 350, 25);
-        pref_tag.setHorizontalAlignment(JLabel.CENTER);
-        pref_tag.setFont(new Font("Arial", Font.BOLD, 14));
-        register_container.add(pref_tag);
-
-        JCheckBox sweet_opcion = new JCheckBox("Dulces");
-        sweet_opcion.setBounds(60, 305, 80, 25);
-        sweet_opcion.setOpaque(false); 
-        sweet_opcion.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(sweet_opcion);
-
-        JCheckBox salty_option = new JCheckBox("Salado");
-        salty_option.setBounds(160, 305, 80, 25);
-        salty_option.setOpaque(false);
-        salty_option.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(salty_option);
-
-        JCheckBox healthy_option = new JCheckBox("Saludable");
-        healthy_option.setBounds(260, 305, 100, 25);
-        healthy_option.setOpaque(false);
-        healthy_option.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(healthy_option);
-
-        JLabel terms_tag = new JLabel("TÉRMINOS");
-        terms_tag.setBounds(50, 340, 350, 25);
-        terms_tag.setBackground(Color.lightGray);
-        terms_tag.setOpaque(true);
-        terms_tag.setHorizontalAlignment(JLabel.CENTER);
-        terms_tag.setFont(new Font("Arial", Font.BOLD, 14));
-        register_container.add(terms_tag);
-
-        JRadioButton accept_terms = new JRadioButton("Acepto los términos");
-        accept_terms.setBounds(60, 370, 160, 25);
-        accept_terms.setOpaque(false);
-        accept_terms.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(accept_terms);
-
-        JRadioButton reject_terms = new JRadioButton("No acepto los términos");
-        reject_terms.setBounds(230, 370, 170, 25);
-        reject_terms.setOpaque(false);
-        reject_terms.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(reject_terms);
-
-        ButtonGroup terms_group = new ButtonGroup();
-        terms_group.add(accept_terms);
-        terms_group.add(reject_terms);
-
-        String[] colonias = {"Camino Real", "La Fuente", "Villas Del Encanto"};
-        JComboBox<String> list = new JComboBox<>(colonias);
-        list.setBounds(50, 410, 350, 30);
-        list.setFont(new Font("Arial", Font.BOLD, 12));
-        register_container.add(list);
-
-        btnCrearCuenta = new JButton();
-        btnCrearCuenta.setText("Crear cuenta");
-        btnCrearCuenta.setLocation(50, 460);
-        btnCrearCuenta.setSize(350, 50);
-        btnCrearCuenta.setFont(new Font("Arial", Font.BOLD, 22));
-        register_container.add(btnCrearCuenta);
+        btnCrearCuenta = new JButton("Crear cuenta");
+        btnCrearCuenta.setBounds(50, 380, 400, 50);
+        btnCrearCuenta.setFont(new Font("Arial", Font.BOLD, 20));
+        left_panel.add(btnCrearCuenta);
 
         btnCancelarRegistro = new JButton("Cancelar");
-        btnCancelarRegistro.setLocation(50, 520);
-        btnCancelarRegistro.setSize(350, 50);
-        btnCancelarRegistro.setFont(new Font("Arial", Font.BOLD, 22));
-        register_container.add(btnCancelarRegistro);
+        btnCancelarRegistro.setBounds(50, 450, 400, 50);
+        btnCancelarRegistro.setFont(new Font("Arial", Font.BOLD, 20));
+        left_panel.add(btnCancelarRegistro);
 
-        register_container.repaint();
-        register_container.revalidate();
+        JPanel right_panel = new JPanel();
+        right_panel.setBounds(600, 50, 500, 550);
+        right_panel.setBackground(Color.lightGray);
+        right_panel.setLayout(null);
+        frameRegistro.add(right_panel);
+
+        JLabel lbl_bio = new JLabel("Bio:");
+        lbl_bio.setBounds(50, 20, 400, 25);
+        right_panel.add(lbl_bio);
+        bio_text = new JTextArea();
+        bio_text.setBounds(50, 45, 400, 100);
+        bio_text.setBorder(BorderFactory.createLineBorder(Color.gray));
+        right_panel.add(bio_text);
+
+        JLabel lbl_pref = new JLabel("Sabores preferidos:");
+        lbl_pref.setBounds(50, 160, 400, 25);
+        right_panel.add(lbl_pref);
+        sweet_opcion = new JCheckBox("Dulce");
+        sweet_opcion.setBounds(50, 185, 100, 25);
+        sweet_opcion.setOpaque(false);
+        right_panel.add(sweet_opcion);
+        salty_option = new JCheckBox("Salado");
+        salty_option.setBounds(160, 185, 100, 25);
+        salty_option.setOpaque(false);
+        right_panel.add(salty_option);
+        healthy_option = new JCheckBox("Saludable");
+        healthy_option.setBounds(270, 185, 120, 25);
+        healthy_option.setOpaque(false);
+        right_panel.add(healthy_option);
+
+        JLabel lbl_terms = new JLabel("Terminos y condiciones:");
+        lbl_terms.setBounds(50, 230, 400, 25);
+        right_panel.add(lbl_terms);
+        accept_terms = new JRadioButton("Acepto los terminos");
+        accept_terms.setBounds(50, 255, 200, 25);
+        accept_terms.setOpaque(false);
+        reject_terms = new JRadioButton("No acepto los términos");
+        reject_terms.setBounds(260, 255, 200, 25);
+        reject_terms.setOpaque(false);
+        
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(accept_terms);
+        grupo.add(reject_terms);
+        
+        right_panel.add(accept_terms);
+        right_panel.add(reject_terms);
 
         frameRegistro.setVisible(true);
     }
