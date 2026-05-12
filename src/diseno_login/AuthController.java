@@ -3,6 +3,7 @@ package diseno_login;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
@@ -46,6 +47,10 @@ public class AuthController {
                     home.setLocation(200, 200);
                     home.getContentPane().setBackground(Color.GREEN);
                     home.menu();
+                    
+                    // MOSTRAR USUARIOS REGISTRADOS
+                    mostrarUsuariosRegistrados(home);
+                    
                     home.setVisible(true);
                     
                 } else {
@@ -60,7 +65,7 @@ public class AuthController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vista.frameLogin.dispose(); 
-                showRegister();             
+                showRegister();              
             }
         });
     }
@@ -113,5 +118,16 @@ public class AuthController {
                 }
             }
         });
+    }
+    
+    private void mostrarUsuariosRegistrados(ventana home) {
+        List<String[]> usuarios = modelo.obtenerUsuarios();
+        int total = modelo.contarUsuarios();
+        
+        if (usuarios.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay usuarios registrados aún.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            vista.usersView(home, usuarios, total);
+        }
     }
 }

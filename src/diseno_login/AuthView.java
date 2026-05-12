@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -14,8 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class AuthView {
 
@@ -231,5 +235,59 @@ public class AuthView {
         right_panel.add(reject_terms);
 
         frameRegistro.setVisible(true);
+    }
+    
+    public void usersView(JFrame ventanaPrincipal, List<String[]> datosUsuarios, int totalUsuarios) {
+        JPanel users = new JPanel();
+        ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        users.setSize(1200, 700);
+        users.setLocation(0, 0);
+        users.setLayout(null);
+        users.setBackground(Color.lightGray);
+        ventanaPrincipal.add(users);
+        
+        JLabel users_title = new JLabel("USUARIOS REGISTRADOS");
+        users_title.setBounds(282, 40, 400, 60);
+        users_title.setOpaque(true);
+        users_title.setBackground(Color.white);
+        users_title.setFont(new Font("Arial", Font.BOLD, 28));
+        users_title.setHorizontalAlignment(JLabel.CENTER);
+        users.add(users_title);
+        
+        JPanel total_panel = new JPanel();
+        total_panel.setBounds(50, 120, 250, 80);
+        total_panel.setBackground(Color.white);
+        total_panel.setLayout(null);
+        users.add(total_panel);
+        
+        JLabel total_tag = new JLabel("Total de usuarios");
+        total_tag.setBounds(0, 15, 250, 20);
+        total_tag.setFont(new Font("Arial", Font.BOLD, 14));
+        total_tag.setHorizontalAlignment(JLabel.CENTER);
+        total_panel.add(total_tag);
+        
+        JLabel total_num = new JLabel(String.valueOf(totalUsuarios));
+        total_num.setBounds(0, 40, 250, 30);
+        total_num.setFont(new Font("Arial", Font.BOLD, 28));
+        total_num.setHorizontalAlignment(JLabel.CENTER);
+        total_panel.add(total_num);
+        
+        String[] title_head = {"ID", "Nombre de Usuario", "Email"};
+        
+        String[][] table_content = new String[datosUsuarios.size()][3];
+        for (int i = 0; i < datosUsuarios.size(); i++) {
+            table_content[i] = datosUsuarios.get(i);
+        }
+        
+        JTable users_table = new JTable(table_content, title_head);
+        users_table.setFont(new Font("Arial", Font.PLAIN, 12));
+        users_table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
+        
+        JScrollPane scrollpane = new JScrollPane(users_table);
+        scrollpane.setBounds(50, 220, 800, 400);
+        users.add(scrollpane);
+        
+        users.repaint();
+        users.revalidate(); 
     }
 }
