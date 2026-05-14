@@ -1,7 +1,6 @@
 package diseno_login;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.List;
@@ -19,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 public class AuthView {
 
@@ -38,6 +36,14 @@ public class AuthView {
     public JTextArea bio_text;
     public JCheckBox sweet_opcion, salty_option, healthy_option;
     public JRadioButton accept_terms, reject_terms;
+
+    public JButton btnAddUserFromList;
+    public JFrame frameAddNewUser;
+    public JTextField new_reg_username;
+    public JTextField new_reg_email;
+    public JTextField new_reg_password;
+    public JButton btnSubmitNewUser;
+    public JButton btnCancelNewUser;
 
     public AuthView() {
     }
@@ -238,6 +244,8 @@ public class AuthView {
     }
     
     public void usersView(JFrame ventanaPrincipal, List<String[]> datosUsuarios, int totalUsuarios) {
+        ventanaPrincipal.getContentPane().removeAll(); 
+        
         JPanel users = new JPanel();
         ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         users.setSize(1200, 700);
@@ -271,6 +279,11 @@ public class AuthView {
         total_num.setFont(new Font("Arial", Font.BOLD, 28));
         total_num.setHorizontalAlignment(JLabel.CENTER);
         total_panel.add(total_num);
+
+        btnAddUserFromList = new JButton("Añadir usuario");
+        btnAddUserFromList.setBounds(850, 150, 200, 50);
+        btnAddUserFromList.setFont(new Font("Arial", Font.BOLD, 16));
+        users.add(btnAddUserFromList);
         
         String[] title_head = {"ID", "Nombre de Usuario", "Email"};
         
@@ -284,10 +297,64 @@ public class AuthView {
         users_table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
         
         JScrollPane scrollpane = new JScrollPane(users_table);
-        scrollpane.setBounds(50, 220, 800, 400);
+        scrollpane.setBounds(50, 220, 1000, 400);
         users.add(scrollpane);
         
-        users.repaint();
-        users.revalidate(); 
+        ventanaPrincipal.revalidate();
+        ventanaPrincipal.repaint(); 
+    }
+
+    public void addNewUserView() {
+        frameAddNewUser = new JFrame("Añadir Nuevo Usuario");
+        frameAddNewUser.setSize(1200, 700);
+        frameAddNewUser.setLocationRelativeTo(null); 
+        frameAddNewUser.setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, 500, 500);
+        panel.setBackground(Color.lightGray);
+        panel.setLayout(null);
+        frameAddNewUser.add(panel);
+
+        JLabel title = new JLabel("Registrar Nuevo Usuario");
+        title.setBounds(50, 20, 400, 40);
+        title.setOpaque(true);
+        title.setBackground(Color.white);
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(title);
+
+        JLabel lbl_u = new JLabel("Nombre de usuario:");
+        lbl_u.setBounds(50, 90, 400, 25);
+        panel.add(lbl_u);
+        new_reg_username = new JTextField();
+        new_reg_username.setBounds(50, 115, 400, 35);
+        panel.add(new_reg_username);
+
+        JLabel lbl_e = new JLabel("Correo electronico:");
+        lbl_e.setBounds(50, 160, 400, 25);
+        panel.add(lbl_e);
+        new_reg_email = new JTextField();
+        new_reg_email.setBounds(50, 185, 400, 35);
+        panel.add(new_reg_email);
+
+        JLabel lbl_p = new JLabel("Contraseña:");
+        lbl_p.setBounds(50, 230, 400, 25);
+        panel.add(lbl_p);
+        new_reg_password = new JTextField();
+        new_reg_password.setBounds(50, 255, 400, 35);
+        panel.add(new_reg_password);
+
+        btnSubmitNewUser = new JButton("Guardar");
+        btnSubmitNewUser.setBounds(50, 330, 180, 45);
+        btnSubmitNewUser.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(btnSubmitNewUser);
+
+        btnCancelNewUser = new JButton("Cancelar");
+        btnCancelNewUser.setBounds(270, 330, 180, 45);
+        btnCancelNewUser.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(btnCancelNewUser);
+
+        frameAddNewUser.setVisible(true);
     }
 }

@@ -48,7 +48,6 @@ public class AuthController {
                     home.getContentPane().setBackground(Color.GREEN);
                     home.menu();
                     
-                    // MOSTRAR USUARIOS REGISTRADOS
                     mostrarUsuariosRegistrados(home);
                     
                     home.setVisible(true);
@@ -104,16 +103,10 @@ public class AuthController {
                 boolean registrado = modelo.registrar(newUser, newEmail, newPass);
                 
                 if(registrado) {
-                    vista.reg_username.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-                    vista.reg_email.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-                    vista.reg_password.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
                     JOptionPane.showMessageDialog(null, "¡Registro exitoso!");
                     vista.frameRegistro.dispose();
                     showLogin();
                 } else {
-                    vista.reg_username.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    vista.reg_email.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    vista.reg_password.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(null, "Error al registrar en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -124,10 +117,52 @@ public class AuthController {
         List<String[]> usuarios = modelo.obtenerUsuarios();
         int total = modelo.contarUsuarios();
         
-        if (usuarios.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay usuarios registrados aún.", "Información", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            vista.usersView(home, usuarios, total);
+        vista.usersView(home, usuarios, total);
+
+        for (ActionListener al : vista.btnAddUserFromList.getActionListeners()) {
+            vista.btnAddUserFromList.removeActionListener(al);
         }
+        
+        vista.btnAddUserFromList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showAddNewUser(home);
+            }
+        });
+    }
+
+    public void showAddNewUser(ventana home) {
+        vista.addNewUserView();
+
+        vista.btnCancelNewUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vista.frameAddNewUser.dispose(); 
+            }
+        });
+
+        vista.btnSubmitNewUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String newUser = vista.new_reg_username.getText();
+                String newEmail = vista.new_reg_email.getText();
+                String newPass = vista.new_reg_password.getText();
+                
+                if (newUser.trim().isEmpty() || newEmail.trim().isEmpty() || newPass.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, llene todos los campos.", "Validación", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                
+                boolean registrado = modelo.registrar(newUser, newEmail, newPass);
+                
+                if(registrado) {
+                    JOptionPane.showMessageDialog(null, "¡Usuario agregado correctamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    vista.frameAddNewUser.dispose();
+                    mostrarUsuariosRegistrados(home); 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 }
