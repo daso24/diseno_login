@@ -33,24 +33,14 @@ public class AuthController {
                     return;
                 }
 
-                boolean esValido = modelo.login(email, pass);
-
-                if (esValido) {
+                if (modelo.login(email, pass)) {
                     vista.username.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
                     vista.contraseña.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
                     JOptionPane.showMessageDialog(null, "¡Acceso concedido!", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
                     
-                    vista.frameLogin.dispose();
+                    vista.frameLogin.dispose(); 
                     
-                    ventana home = new ventana();
-                    home.setSize(1200, 700);
-                    home.setLocation(200, 200);
-                    home.getContentPane().setBackground(Color.GREEN);
-                    home.menu();
-                    
-                    mostrarUsuariosRegistrados(home);
-                    
-                    home.setVisible(true);
+                    abrirDashboard(); 
                     
                 } else {
                     vista.username.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
@@ -67,6 +57,18 @@ public class AuthController {
                 showRegister();              
             }
         });
+    }
+
+    private void abrirDashboard() {
+        ventana home = new ventana();
+        home.setSize(1200, 700);
+        home.setLocation(200, 200);
+        home.getContentPane().setBackground(Color.GREEN);
+        home.menu();
+        
+        mostrarUsuariosRegistrados(home);
+        
+        home.setVisible(true);
     }
 
     public void showRegister() {
@@ -88,21 +90,16 @@ public class AuthController {
                 String newPass = vista.reg_password.getText();
                 
                 if (newUser.trim().isEmpty() || newEmail.trim().isEmpty() || newPass.trim().isEmpty()) {
-                    vista.reg_username.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    vista.reg_email.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-                    vista.reg_password.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(null, "Por favor, llene los datos de la cuenta.", "Validación", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 
                 if (!vista.accept_terms.isSelected()) {
-                    JOptionPane.showMessageDialog(null, "Debe aceptar los términos y condiciones para crear una cuenta.", "Términos", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Debe aceptar los términos.", "Términos", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 
-                boolean registrado = modelo.registrar(newUser, newEmail, newPass);
-                
-                if(registrado) {
+                if(modelo.registrar(newUser, newEmail, newPass)) {
                     JOptionPane.showMessageDialog(null, "¡Registro exitoso!");
                     vista.frameRegistro.dispose();
                     showLogin();
@@ -118,26 +115,24 @@ public class AuthController {
         int total = modelo.contarUsuarios();
         
         vista.usersView(home, usuarios, total);
-
-        for (ActionListener al : vista.btnAddUserFromList.getActionListeners()) {
-            vista.btnAddUserFromList.removeActionListener(al);
-        }
         
         vista.btnAddUserFromList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showAddNewUser(home);
+                home.dispose(); 
+                showAddNewUser(); 
             }
         });
     }
 
-    public void showAddNewUser(ventana home) {
+    public void showAddNewUser() {
         vista.addNewUserView();
 
         vista.btnCancelNewUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vista.frameAddNewUser.dispose(); 
+                abrirDashboard(); 
             }
         });
 
@@ -153,12 +148,12 @@ public class AuthController {
                     return;
                 }
                 
-                boolean registrado = modelo.registrar(newUser, newEmail, newPass);
-                
-                if(registrado) {
+                if(modelo.registrar(newUser, newEmail, newPass)) {
                     JOptionPane.showMessageDialog(null, "¡Usuario agregado correctamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    vista.frameAddNewUser.dispose();
-                    mostrarUsuariosRegistrados(home); 
+                    
+                    vista.frameAddNewUser.dispose(); 
+                    abrirDashboard(); 
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

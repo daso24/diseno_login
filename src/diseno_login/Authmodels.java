@@ -11,6 +11,7 @@ import java.util.List;
 public class Authmodels {
 
 	public Authmodels() {
+		
 	}
 	
 	public boolean login(String email, String password) {
@@ -22,11 +23,17 @@ public class Authmodels {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+
 			ps = conn.prepareStatement(query);
 			ps.setString(1, email);
 			ps.setString(2, password);
+
 			rs = ps.executeQuery();
-			if (rs.next()) return true;  
+			
+			if (rs.next()) {
+				return true;
+			}  
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -36,6 +43,7 @@ public class Authmodels {
 				if (conn != null) conn.close();
 			} catch (Exception e) {}
 		}
+		
 		return false; 
 	}
 
@@ -47,12 +55,18 @@ public class Authmodels {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+
 			ps = conn.prepareStatement(query);
 			ps.setString(1, username);
 			ps.setString(2, email);
 			ps.setString(3, password);
+
 			int filasAfectadas = ps.executeUpdate();
-			if (filasAfectadas > 0) return true;
+			
+			if (filasAfectadas > 0) {
+				return true;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -61,6 +75,7 @@ public class Authmodels {
 				if (conn != null) conn.close();
 			} catch (Exception e) {}
 		}
+		
 		return false;
 	}
 
@@ -74,8 +89,10 @@ public class Authmodels {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
+			
 			while (rs.next()) {
 				String[] usuario = new String[3];
 				usuario[0] = String.valueOf(rs.getInt("id"));
@@ -83,6 +100,7 @@ public class Authmodels {
 				usuario[2] = rs.getString("email");
 				listaUsuarios.add(usuario);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -92,6 +110,7 @@ public class Authmodels {
 				if (conn != null) conn.close();
 			} catch (Exception e) {}
 		}
+		
 		return listaUsuarios;
 	}
 	
@@ -105,9 +124,14 @@ public class Authmodels {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
-			if (rs.next()) total = rs.getInt("total");
+			
+			if (rs.next()) {
+				total = rs.getInt("total");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -117,6 +141,7 @@ public class Authmodels {
 				if (conn != null) conn.close();
 			} catch (Exception e) {}
 		}
+		
 		return total;
 	}
 }

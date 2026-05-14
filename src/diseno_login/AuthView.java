@@ -45,8 +45,7 @@ public class AuthView {
     public JButton btnSubmitNewUser;
     public JButton btnCancelNewUser;
 
-    public AuthView() {
-    }
+    public AuthView() {}
 
     public void loginView() {
         frameLogin = new JFrame();
@@ -244,8 +243,6 @@ public class AuthView {
     }
     
     public void usersView(JFrame ventanaPrincipal, List<String[]> datosUsuarios, int totalUsuarios) {
-        ventanaPrincipal.getContentPane().removeAll(); 
-        
         JPanel users = new JPanel();
         ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         users.setSize(1200, 700);
@@ -255,7 +252,7 @@ public class AuthView {
         ventanaPrincipal.add(users);
         
         JLabel users_title = new JLabel("USUARIOS REGISTRADOS");
-        users_title.setBounds(282, 40, 400, 60);
+        users_title.setBounds(400, 40, 400, 60);
         users_title.setOpaque(true);
         users_title.setBackground(Color.white);
         users_title.setFont(new Font("Arial", Font.BOLD, 28));
@@ -300,13 +297,13 @@ public class AuthView {
         scrollpane.setBounds(50, 220, 1000, 400);
         users.add(scrollpane);
         
-        ventanaPrincipal.revalidate();
-        ventanaPrincipal.repaint(); 
+        users.repaint();
+        users.revalidate(); 
     }
 
     public void addNewUserView() {
         frameAddNewUser = new JFrame("Añadir Nuevo Usuario");
-        frameAddNewUser.setSize(1200, 700);
+        frameAddNewUser.setSize(500, 500);
         frameAddNewUser.setLocationRelativeTo(null); 
         frameAddNewUser.setLayout(null);
 
