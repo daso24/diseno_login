@@ -22,7 +22,7 @@ public class Authmodels {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_qwwLatXD", "u_bGro6n", "MZKAT618aNG5");
 
 			ps = conn.prepareStatement(query);
 			ps.setString(1, email);
@@ -54,7 +54,7 @@ public class Authmodels {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_qwwLatXD", "u_bGro6n", "MZKAT618aNG5");
 
 			ps = conn.prepareStatement(query);
 			ps.setString(1, username);
@@ -88,7 +88,7 @@ public class Authmodels {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_qwwLatXD", "u_bGro6n", "MZKAT618aNG5");
 
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
@@ -123,7 +123,7 @@ public class Authmodels {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_qwwLatXD", "u_bGro6n", "MZKAT618aNG5");
 
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
